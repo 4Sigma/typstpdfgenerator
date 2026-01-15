@@ -1,0 +1,22 @@
+{
+    "title": "Sample Document | With var retrived from JSON",
+    "subtitle": "this is a subtitle",
+    "authors": [
+        {
+            "name": "Alice",
+            "email": "alice.doe@example.com",
+            "affiliation": "Example University"
+        },
+        {
+            "name": "Bob",
+            "email": "bob.smith@example.com",
+            "affiliation": "Example University"
+        },
+        {
+            "name": "Charlie",
+            "email": "charlie.brown@example.com",
+            "affiliation": "Example University"
+        }
+    ],
+    "abstract": "This document demonstrates how to use Typst to create a structured document with metadata and content sections."
+}
