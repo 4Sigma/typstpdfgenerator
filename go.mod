@@ -1,4 +1,4 @@
-module github.com/4Sigma/typstpdfgenerator
+module github.com/4sigma/typstpdfgenerator
 
 go 1.25.4
 
