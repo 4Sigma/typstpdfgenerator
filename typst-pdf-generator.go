@@ -238,11 +238,21 @@ func New(authKey, faasGateway string, opts ...Option) (*Client, error) {
 	return client, nil
 }
 
-func (c *Client) convert(ctx context.Context, w io.Writer, content string, templateData []byte, options []string, media []MediaFile) (ResponseInfo, error) {
+func (c *Client) Convert(ctx context.Context, w io.Writer, content string, templateData []byte, options []string, media []MediaFile) (ResponseInfo, error) {
 	correlationID := CorrelationIDFromContext(ctx)
 	if correlationID == "" {
 		correlationID = uuid.NewString()
 	}
+
+	defaultOptions := []string{
+		"--ignore-system-fonts",
+		"--font-path=fonts",
+		"--diagnostic-format=short",
+	}
+	if len(options) == 0 {
+		options = defaultOptions
+	}
+
 	info := ResponseInfo{CorrelationID: correlationID}
 
 	mediaEncoded := make(map[string]string, len(media))
@@ -347,12 +357,12 @@ func (c *Client) GeneratePDFFromFile(ctx context.Context, w io.Writer, content, 
 		return ResponseInfo{}, fmt.Errorf("failed to read template file: %w", err)
 	}
 
-	return c.convert(ctx, w, content, templateData, options, media)
+	return c.Convert(ctx, w, content, templateData, options, media)
 }
 
 func (c *Client) GeneratePDFFromString(ctx context.Context, w io.Writer, content, templateString string, options []string, media []MediaFile) (ResponseInfo, error) {
 	templateData := []byte(templateString)
-	return c.convert(ctx, w, content, templateData, options, media)
+	return c.Convert(ctx, w, content, templateData, options, media)
 }
 
 func (c *Client) SavePDF(ctx context.Context, content, templateFilePath, outputPath string, options []string, media []MediaFile) (ResponseInfo, error) {
@@ -369,7 +379,7 @@ func (c *Client) SavePDF(ctx context.Context, content, templateFilePath, outputP
 		return ResponseInfo{}, fmt.Errorf("failed to create output file: %w", err)
 	}
 
-	info, convErr := c.convert(ctx, file, content, templateData, options, media)
+	info, convErr := c.Convert(ctx, file, content, templateData, options, media)
 	closeErr := file.Close()
 	if convErr != nil {
 		_ = os.Remove(outputPath)
