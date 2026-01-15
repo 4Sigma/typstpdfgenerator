@@ -1,4 +1,2 @@
-github.com/4sigma/typst-pdf-generator-go v0.0.0-20260115111539-376e3e5ab3c8 h1:7iyrwXUiqDQRowwNJuOPfc4I9LdfgpxYHjzWXpn3eJQ=
-github.com/4sigma/typst-pdf-generator-go v0.0.0-20260115111539-376e3e5ab3c8/go.mod h1:HKVzxiu6CtG8h7l7zJrDx1eTAWfjBHiiPC0gumm+eZ0=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
